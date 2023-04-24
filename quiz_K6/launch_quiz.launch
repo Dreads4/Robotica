@@ -1,0 +1,8 @@
+<launch>
+<include file="$(find volta_simulation)/launch/simulation.launch"/>
+<node pkg="quiz_K6"
+type="service_client_quiz.py"
+name="service_move_in_square_quiz"
+output="screen">
+</node>
+</launch>

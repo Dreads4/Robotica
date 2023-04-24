@@ -1,0 +1,3 @@
+<launch>
+	<node pkg="topics_quiz" type="subscriber.py" name="subscriber" output="screen"></node>
+</launch>

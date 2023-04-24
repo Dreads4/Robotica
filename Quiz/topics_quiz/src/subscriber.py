@@ -4,20 +4,6 @@ from sensor_msgs.msg import LaserScan
 from geometry_msgs.msg import Twist
 
 def callback(sensor_msgs):
-    print (sensor_msgs.ranges)
-
-rospy.init_node('topic_subscriber')  
-sub = rospy.Subscriber('/scan', LaserScan, callback)
-rospy.spin()
-
-pub=rospy.Publisher('/cmd_vel',Twist,queue_size=1)
-rate=rospy.Rate(2)
-
-count = Twist()
-count.linear.x=0
-count.angular.z=0
-
-while not rospy.is_shutdown():
 	if sensor_msgs.ranges >1:
 	pub.publisher(count)
 	count.linear.z +=0.5
@@ -34,5 +20,16 @@ while not rospy.is_shutdown():
 	pub.publisher(count)
 	count.angular.z -=180
 	rate.sleep()
+	print (sensor_msgs.ranges)
+
+rospy.init_node('topic_subscriber')  
+sub = rospy.Subscriber('/scan', LaserScan, callback)
+
+pub=rospy.Publisher('/cmd_vel',Twist,queue_size=1)
+rate=rospy.Rate(2)
+
+count = Twist()
+count.linear.x=0
+count.angular.z=0
 
 rospy.spin()
