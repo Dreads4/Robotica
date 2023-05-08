@@ -5,9 +5,6 @@ import time
 # you import the service message python classes generated from Empty.srv
 from services_pkg.srv import CustomServMess, CustomServMessResponse
 from geometry_msgs.msg import Twist
-rospy.init_node('service_server_quiz')
-tb_publisher = rospy.Publisher('/volta_base_controller/cmd_vel',Twist,queue_size=1)
-vel = Twist()
 
 def my_callback(request):
 	print(f"turtlebot moving in circles for {request.duration} seconds")
@@ -22,5 +19,9 @@ def my_callback(request):
 		tb_publisher.publish(vel)
 	return CustomServMessResponse(True)
 	
+rospy.init_node('service_server_quiz')
+tb_publisher = rospy.Publisher('/volta_base_controller/cmd_vel',Twist,queue_size=1)
+vel = Twist()	
+
 my_service= rospy.Service('/move_tb_in_square', CustomServMess, my_callback)
 rospy.spin()
